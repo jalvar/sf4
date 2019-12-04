@@ -13,9 +13,6 @@ class RankingController extends AbstractController{
      * @Route("/news", name="news")
      */
     public function index(){
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/RankingController.php',
-        ]);
+        return $this->render('ranking/news.html.twig');
     }
 }
