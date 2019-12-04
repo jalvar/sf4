@@ -12,11 +12,8 @@ class HomeController extends AbstractController{
     /**
      * @Route("/", name="homepage")
      */
-    public function index(ArtistRepository $artistRepository){
-        // Récupérer toutes les entités
-        $resultats = $artistRepository->findDjs();
+    public function index(){
 
-        dd($resultats);
 
         return $this->render('index.html.twig');
     }
