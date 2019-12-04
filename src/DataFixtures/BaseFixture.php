@@ -50,6 +50,30 @@ abstract class BaseFixture extends Fixture
             }
             // Avertir Doctrine pour l'enregistrement de l'entité
             $this->manager->persist($entity);
+
+            //Ajouter une référence pour l'entité
+            $this->addReference(sprintf('%s_%d', $groupName,$i),$entity);
+
         }
+    }
+
+    /**
+     * Obtenir une entité aléatoire d'un groupe
+     */
+    protected function getRandomReference(string $groupName)
+    {
+        // Si les references ne sont pas présentes dans la propriété
+        if (!isset($this->references[$groupName])){
+            //Récupération des références
+            foreach($this->referenceRepository->getReferences()as $key =>$ref){
+                if(strpos($key, $groupName . '_') === 0) {
+                    $this->references[groupName][] = $ref;
+                }
+            }
+        }
+
+        //Retourner une référence aléatoire
+        $randomReferenceKey = $this->faker->randomElement($this->references[$groupName]);
+        return $this->getReference($randomReferenceKey);
     }
 }
