@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 abstract class BaseFixture extends Fixture
 {
@@ -17,9 +18,11 @@ abstract class BaseFixture extends Fixture
 
     // Méthode à implémenter par les classes enfants
     // dans laquelle générer les fausses données
+
     abstract protected function loadData(ObjectManager $manager);
 
     // Méthode imposée par Doctrine
+
     public function load(ObjectManager $manager)
     {
         // Enregistrement du Manager et instanciation de faker
@@ -45,7 +48,7 @@ abstract class BaseFixture extends Fixture
             if ($entity === null){
                 throw new \LogicException('Tu as oublié de retourner l\'entité');
             }
-
+            // Avertir Doctrine pour l'enregistrement de l'entité
             $this->manager->persist($entity);
         }
     }
